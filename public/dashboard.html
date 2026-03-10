@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SigapTugas - Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        blue: {
+                            950: '#0a192f',
+                            900: '#172a45',
+                            800: '#1d4ed8',
+                            700: '#2563eb',
+                            600: '#3b82f6',
+                            500: '#60a5fa',
+                            400: '#93c5fd',
+                            300: '#bfdbfe',
+                            200: '#dbeafe',
+                            100: '#eff6ff'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-blue-950 min-h-screen font-sans">
+    <nav class="bg-blue-900 text-white p-4 shadow-xl">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-xl font-bold italic">Sigap<span class="text-blue-400">Tugas</span></h1>
+            <div class="flex items-center gap-4">
+                <span id="user-display" class="text-sm opacity-80">Memuat...</span>
+                <button onclick="logout()" class="bg-blue-700 hover:bg-blue-600 px-3 py-1 rounded text-xs transition-colors">Logout</button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container mx-auto p-6">
+        <div class="flex justify-between items-end mb-8">
+            <div>
+                <h2 class="text-3xl font-bold text-blue-100">Daftar Tugas</h2>
+                <p class="text-blue-300">Pantau semua kewajiban akademismu di sini.</p>
+            </div>
+            <button id="add-task-btn" onclick="showAddTaskModal()" class="hidden bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded-lg transition-colors">
+                + Tambah Tugas
+            </button>
+        </div>
+
+        <div id="tasks-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="animate-pulse bg-blue-900 h-48 rounded-xl"></div>
+            <div class="animate-pulse bg-blue-900 h-48 rounded-xl"></div>
+            <div class="animate-pulse bg-blue-900 h-48 rounded-xl"></div>
+        </div>
+    </main>
+
+    <!-- Modal for adding tasks (Teacher only) -->
+    <div id="add-task-modal" class="hidden fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50">
+        <div class="bg-blue-900 p-6 rounded-2xl shadow-xl max-w-md w-full mx-4 border border-blue-700">
+            <h3 class="text-xl font-bold mb-4 text-blue-100">Tambah Tugas Baru</h3>
+            <form id="add-task-form" class="space-y-4" onsubmit="handleAddTask(event)">
+                <input type="text" id="teacher-name" placeholder="Nama Guru" class="w-full px-4 py-3 rounded-lg border border-blue-700 bg-blue-950 text-blue-100 placeholder-blue-400 focus:ring-2 focus:ring-blue-400 outline-none" required>
+                <textarea id="task-description" placeholder="Deskripsi Tugas" class="w-full px-4 py-3 rounded-lg border border-blue-700 bg-blue-950 text-blue-100 placeholder-blue-400 focus:ring-2 focus:ring-blue-400 outline-none h-32" required></textarea>
+                <input type="datetime-local" id="task-deadline" class="w-full px-4 py-3 rounded-lg border border-blue-700 bg-blue-950 text-blue-100 focus:ring-2 focus:ring-blue-400 outline-none" required>
+                <div class="flex gap-3">
+                    <button type="submit" class="flex-1 bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 rounded-lg transition-colors">Simpan</button>
+                    <button type="button" onclick="hideAddTaskModal()" class="flex-1 bg-blue-800 hover:bg-blue-700 text-blue-100 font-bold py-3 rounded-lg transition-colors">Batal</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+

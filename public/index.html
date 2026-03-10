@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SigapTugas - Login</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        blue: {
+                            950: '#0a192f',
+                            900: '#172a45',
+                            800: '#1d4ed8',
+                            700: '#2563eb',
+                            600: '#3b82f6',
+                            500: '#60a5fa',
+                            400: '#93c5fd',
+                            300: '#bfdbfe',
+                            200: '#dbeafe',
+                            100: '#eff6ff'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-blue-950 min-h-screen flex items-center justify-center font-sans">
+    <div class="max-w-4xl w-full p-6 text-center">
+        <h1 class="text-4xl font-bold text-blue-400 mb-8">Sigap<span class="text-blue-200">Tugas</span></h1>
+        
+        <div class="grid md:grid-cols-2 gap-6" id="role-selection">
+            <button onclick="showLoginForm('Siswa')" class="group p-8 bg-blue-900 border-2 border-transparent hover:border-blue-400 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300">
+                <div class="w-16 h-16 bg-blue-800 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-blue-500 transition-colors">
+                    <svg class="w-8 h-8 text-blue-300 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 14l9-5-9-5-9 5 9 5z"/>
+                        <path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/>
+                    </svg>
+                </div>
+                <h3 class="text-xl font-bold text-blue-100">Login Siswa</h3>
+                <p class="text-blue-300 mt-2">Cek tugas dan kumpulkan tepat waktu.</p>
+            </button>
+
+            <button onclick="showLoginForm('Guru')" class="group p-8 bg-blue-900 border-2 border-transparent hover:border-blue-400 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300">
+                <div class="w-16 h-16 bg-blue-800 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:bg-blue-500 transition-colors">
+                    <svg class="w-8 h-8 text-blue-300 group-hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+                    </svg>
+                </div>
+                <h3 class="text-xl font-bold text-blue-100">Login Guru</h3>
+                <p class="text-blue-300 mt-2">Kelola tugas dan pantau progres siswa.</p>
+            </button>
+        </div>
+
+        <div id="login-form" class="hidden max-w-md mx-auto bg-blue-900 p-8 rounded-2xl shadow-xl border border-blue-700">
+            <h2 class="text-2xl font-bold mb-6 text-blue-100" id="login-title">Login</h2>
+            <form class="space-y-4" onsubmit="handleLogin(event)">
+                <input type="email" placeholder="Email" class="w-full px-4 py-3 rounded-lg border border-blue-700 bg-blue-950 text-blue-100 placeholder-blue-400 focus:ring-2 focus:ring-blue-400 outline-none" required>
+                <input type="password" placeholder="Password" class="w-full px-4 py-3 rounded-lg border border-blue-700 bg-blue-950 text-blue-100 placeholder-blue-400 focus:ring-2 focus:ring-blue-400 outline-none" required>
+                <button type="submit" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 rounded-lg transition-colors">Masuk Sekarang</button>
+                <button type="button" onclick="location.reload()" class="text-sm text-blue-400 hover:text-blue-200 underline">Kembali</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function showLoginForm(role) {
+            document.getElementById('role-selection').classList.add('hidden');
+            document.getElementById('login-form').classList.remove('hidden');
+            document.getElementById('login-title').innerText = 'Login ' + role;
+            
+            // Store role in localStorage for dashboard use
+            localStorage.setItem('userRole', role);
+        }
+
+        function handleLogin(e) {
+            e.preventDefault();
+            
+            // Ambil email dari input
+            const emailInput = document.querySelector('input[type="email"]');
+            const email = emailInput.value;
+            
+            // Simpan email ke localStorage
+            localStorage.setItem('userEmail', email);
+            
+            console.log('Login successful with email:', email);
+            
+            // Redirect ke dashboard
+            window.location.href = 'dashboard.html';
+        }
+    </script>
+</body>
+</html>
+

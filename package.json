@@ -1,0 +1,19 @@
+{
+  "name": "sigaptugas",
+  "version": "1.0.0",
+  "description": "Sistem Manajemen Tugas untuk Siswa dan Guru dengan Supabase",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": ["task-management", "education", "supabase"],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2"
+  }
+}
+
